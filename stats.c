@@ -21,7 +21,7 @@ unsigned char mean;
 int i;
 
 
-void main() {
+int main() {
 
     unsigned char my_array[SIZE] = { 34, 201, 190, 154,   8, 194,   2,   6,
                                     114, 88,   45,  76, 123,  87,  25,  23,
@@ -32,6 +32,7 @@ void main() {
     print_array(my_array,SIZE);
     printf("  main: find_mean returned %d\n", find_mean(my_array,SIZE));
 
+    return 0;
 }
 
 
@@ -51,7 +52,7 @@ unsigned char find_mean(unsigned char *array, int length) {
 
     printf("  find_mean: calculated mean was %f\n", mean);
 
-    return( (unsigned char)mean );
+    return( (unsigned char)(mean+0.5) );
 
 }
 
@@ -66,6 +67,6 @@ void print_array(unsigned char *array, int length) {
         printf("  Index: %03d    %03d\n", i, array[i]);
     }
 
-    printf("Array Length: %03d\n\n", i+1);
+    printf("Array Length: %03d\n\n", i);
 
 }
