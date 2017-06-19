@@ -36,6 +36,7 @@ int main() {
 }
 
 
+// Function: find_mean
 unsigned char find_mean(unsigned char *array, int length) { 
   
     // forget overflow  checking for today
@@ -56,6 +57,7 @@ unsigned char find_mean(unsigned char *array, int length) {
 
 }
 
+// Function: print_array
 void print_array(unsigned char *array, int length) {
 
     int i;
