@@ -188,7 +188,7 @@ $(TARGET).d: $(SRCS)
 .PHONY: hex
 hex: $(TARGET).out
 	$(OBJCOPY) -O ihex $< $(TARGET).hex
-	$(SIZE) -Bd $(TARGET).out
+	$(SIZE) -Bd $(TARGET).hex
 	@echo
 
 
