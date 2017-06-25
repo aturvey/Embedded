@@ -1,11 +1,15 @@
 # Prerequisites
 *.d
+*.dep
 
 # Object files
 *.o
 *.ko
 *.obj
 *.elf
+
+# Disassembly
+*.dump
 
 # Linker output
 *.ilk
@@ -15,6 +19,7 @@
 # Precompiled Headers
 *.gch
 *.pch
+*.i
 
 # Libraries
 *.lib
