@@ -101,7 +101,7 @@ LDFLAGS = -Wl,-Map=$(TARGET).map
 
 # Linker file and flags, architecture specific
 ifeq ($(PLATFORM), MSP432)
-LINKER_FILE = ../msp432p401r.lds
+LINKER_FILE = ./msp432p401r.lds
 LDFLAGS += -T $(LINKER_FILE)
 endif
 
@@ -111,7 +111,7 @@ CPPS := $(SOURCES:.c=.i)
 DEPS := $(SOURCES:.c=.d)
 ASMS := $(SOURCES:.c=.asm)
 OBJS := $(SOURCES:.c=.o)
-MAPS := $(SOURCES:.c=.map)
+MAPS := $(SOURCES:.c=.map) $(TARGET).map
 DMPS := $(SOURCES:.c=.dump)
 
 ###############################################

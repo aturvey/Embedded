@@ -10,14 +10,14 @@
 #*****************************************************************************
 
 # Source files
-SOURCES = interrupts_msp432p401r_gcc.c \
-          main.c                       \
-          memory.c                     \
-          startup_msp432p401r_gcc.c    \
-          system_msp432p401r.c 
+SOURCES = ./src/interrupts_msp432p401r_gcc.c     \
+          ./src/main.c                           \
+          ./src/memory.c                         \
+          ./src/startup_msp432p401r_gcc.c        \
+          ./src/system_msp432p401r.c 
 
 # Include paths
-INCLUDES = ../include/CMSIS/                     \
-           ../include/common/                    \
-           ../include/msp432/
+INCLUDES = ./include/CMSIS/                      \
+           ./include/common/                     \
+           ./include/msp432/
 
