@@ -28,6 +28,9 @@ CPU = $(shell machine)
 ARCH = $(shell uname -p)
 SPECS = nosys.specs
 
+# source and includes paths
+SRC_PATH = ./src/
+INC_PATH = ./include/common/
 
 # Default tools
 CC = gcc
@@ -37,7 +40,9 @@ OBJDUMP = objdump
 OBJCOPY = objcopy
 
 # Preprocessor flags, default
-CPPFLAGS += $(foreach INC, $(INCLUDES), -I$(INC))
+#CPPFLAGS += $(foreach INC, $(INCLUDES), -I$(INC))
+CPPFLAGS += -I$(INC_PATH)
+CPPFLAGS += -D VERBOSE
 
 
 # Compiler flags, common
@@ -49,7 +54,15 @@ CFLAGS = -Wall               \
          -v
 
 # Linker file and flags
-LDFLAGS = -Wl,-Map=$(TARGET).map 
+LDFLAGS = -Wl
+  #,-Map=$(TARGET).map 
+
+# Flags for size tool
+ifeq ($(OS), Darwin)
+    SIZEFLAGS = -m -x
+else
+    SIZEFLAGS = -Axt
+endif
 
 SRCS := $(SOURCES)
 INCS := $(INCLUDES)
@@ -92,20 +105,21 @@ info:
 	@echo CPPFLAGS = $(CPPFLAGS)
 	@echo CFLAGS = $(CFLAGS)
 	@echo LDFLAGS = $(LDFLAGS)
+	@echo SIZEFLAGS = $(SIZEFLAGS)
 	@echo LINKER_FILE = $(LINKER_FILE)
 	@echo 
 
 
-%.i : %.c
+%.i:%.c
 	$(CC) -E $< $(CPPFLAGS) $(CFLAGS) -o $@
 
-%.d : %.c
+%.d:%.c
 	$(CC) -E -MM $< $(CPPFLAGS) -o $@
 
-%.asm : %.i
-	$(CC) -S $< $(CPPFLAGS) $(CFLAGS) -o $@
+%.asm:%.i
+	$(CC) -S $< $(CFLAGS) -o $@
 
-%.o : %.c
+%.o:%.c
 	$(CC) -c $< $(CPPFLAGS) $(CFLAGS) -o $@
 	$(OBJDUMP) --disassemble $@ > $*.dump
 
@@ -114,17 +128,16 @@ info:
 build: all
 
 .PHONY: all
-all: $(TARGET).out $(TARGET).d
-	echo
-	$(SIZE) -Axt $(TARGET).out
-	$(SIZE) -Bx $(TARGET).out
+all: $(TARGET) $(TARGET).d
+	@echo
+	$(SIZE) $(SIZEFLAGS) $(TARGET)
 	@echo
 
 .PHONY: compile-all
 compile-all : $(OBJS)
 
 
-$(TARGET).out: $(OBJS)
+$(TARGET): $(OBJS)
 	$(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) -o $@
 
 $(TARGET).d: $(SRCS)
@@ -133,5 +146,5 @@ $(TARGET).d: $(SRCS)
 
 .PHONY:clean
 clean:
-	@rm -f $(OBJS) $(ASMS) $(DEPS) $(CPPS) $(MAPS) $(DMPS) $(TARGET).out $(TARGET).hex  
+	@rm -f $(OBJS) $(ASMS) $(DEPS) $(CPPS) $(MAPS) $(DMPS) $(TARGET) $(TARGET).hex  
 

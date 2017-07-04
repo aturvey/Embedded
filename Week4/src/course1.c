@@ -19,11 +19,10 @@
 
 #include <stdio.h>
 #include <stdint.h>
-#include "platform.h"
 #include "course1.h"
+#include "stats.h"
 #include "memory.h"
 #include "data.h"
-#include "stats.h"
 
 int8_t test_data1() {
   uint8_t * ptr;
@@ -36,6 +35,9 @@ int8_t test_data1() {
 
   if (! ptr )
   {
+    #ifdef VERBOSE
+    printf("%s: Fail\n", __func__);
+    #endif
     return TEST_ERROR;
   }
 
@@ -49,6 +51,9 @@ int8_t test_data1() {
 
   if ( value != num )
   {
+    #ifdef VERBOSE
+    printf("%s: Fail\n", __func__);
+    #endif
     return TEST_ERROR;
   }
   return TEST_NO_ERROR;
@@ -65,6 +70,9 @@ int8_t test_data2() {
 
   if (! ptr )
   {
+    #ifdef VERBOSE
+    printf("%s: Fail\n", __func__);
+    #endif
     return TEST_ERROR;
   }
 
@@ -78,6 +86,9 @@ int8_t test_data2() {
 
   if ( value != num )
   {
+    #ifdef VERBOSE
+    printf("%s: Fail\n", __func__);
+    #endif
     return TEST_ERROR;
   }
   return TEST_NO_ERROR;
@@ -95,6 +106,9 @@ int8_t test_memmove1() {
 
   if (! set ) 
   {
+    #ifdef VERBOSE
+    printf("%s: Fail\n", __func__);
+    #endif
     return TEST_ERROR;
   }
   
@@ -115,6 +129,9 @@ int8_t test_memmove1() {
   {
     if (set[i + 16] != i)
     {
+      #ifdef VERBOSE
+      printf("%s: Fail\n", __func__);
+      #endif
       ret = TEST_ERROR;
     }
   }
@@ -135,6 +152,9 @@ int8_t test_memmove2() {
 
   if (! set )
   {
+    #ifdef VERBOSE
+    printf("%s: Fail\n", __func__);
+    #endif
     return TEST_ERROR;
   }
   ptra = &set[0];
@@ -153,6 +173,9 @@ int8_t test_memmove2() {
   {
     if (set[i + 8] != i)
     {
+      #ifdef VERBOSE
+      printf("%s: Fail\n", __func__);
+      #endif
       ret = TEST_ERROR;
     }
   }
@@ -173,6 +196,9 @@ int8_t test_memmove3() {
 
   if (! set ) 
   {
+    #ifdef VERBOSE
+    printf("%s: Fail\n", __func__);
+    #endif
     return TEST_ERROR;
   }
   ptra = &set[8];
@@ -192,6 +218,9 @@ int8_t test_memmove3() {
   {
     if (set[i] != (i + 8))
     {
+      #ifdef VERBOSE
+      printf("%s: Fail\n", __func__);
+      #endif
       ret = TEST_ERROR;
     }
   }
@@ -214,6 +243,9 @@ int8_t test_memcopy() {
 
   if (! set ) 
   {
+    #ifdef VERBOSE
+    printf("%s: Fail\n", __func__);
+    #endif
     return TEST_ERROR;
   }
   ptra = &set[0];
@@ -232,6 +264,9 @@ int8_t test_memcopy() {
   {
     if (set[i+16] != i)
     {
+      #ifdef VERBOSE
+      printf("%s: Fail\n", __func__);
+      #endif
       ret = TEST_ERROR;
     }
   }
@@ -252,6 +287,9 @@ int8_t test_memset()
   set = (uint8_t*)reserve_words(MEM_SET_SIZE_W);
   if (! set )
   {
+    #ifdef VERBOSE
+    printf("%s: Fail\n", __func__);
+    #endif
     return TEST_ERROR;
   }
   ptra = &set[0];
@@ -274,10 +312,16 @@ int8_t test_memset()
   {
     if (set[i] != 0xFF)
     {
+      #ifdef VERBOSE
+      printf("%s: Fail\n", __func__);
+      #endif
       ret = TEST_ERROR;
     }
     if (set[16 + i] != 0)
     {
+      #ifdef VERBOSE
+      printf("%s: Fail\n", __func__);
+      #endif
       ret = TEST_ERROR;
     }
   }
@@ -301,6 +345,9 @@ int8_t test_reverse()
   copy = (uint8_t*)reserve_words(MEM_SET_SIZE_W);
   if (! copy )
   {
+    #ifdef VERBOSE
+    printf("%s: Fail\n", __func__);
+    #endif
     return TEST_ERROR;
   }
   
@@ -314,6 +361,9 @@ int8_t test_reverse()
   {
     if (set[i] != copy[MEM_SET_SIZE_B - i - 1])
     {
+      #ifdef VERBOSE
+      printf("%s: Fail\n", __func__);
+      #endif
       ret = TEST_ERROR;
     }
   }

@@ -20,13 +20,13 @@
  * @date April 1 2017
  *
  */
-#include <stdio.h>
-#include "memory.h"
-#include "data.h"
-
+#include "course1.h"
 
 /* A pretty boring main file */
 int main(void) {
-  return 0;
+
+    course1();
+
+    return 0;
 }
 
