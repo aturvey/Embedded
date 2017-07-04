@@ -1,13 +1,3 @@
-/******************************************************************************
- * Copyright (C) 2017 by Alex Fosdick - University of Colorado
- *
- * Redistribution, modification or use of this software in source or binary
- * forms is permitted as long as the files maintain this copyright. Users are 
- * permitted to modify this and use it to learn about the field of embedded
- * software. Alex Fosdick and the University of Colorado are not liable for any
- * misuse of this material. 
- *
- *****************************************************************************/
 /**
  * @file memory.h
  * @brief Abstraction of memory read and write operations
@@ -22,6 +12,8 @@
 #ifndef __MEMORY_H__
 #define __MEMORY_H__
 
+#include <stdint.h>
+#include <stddef.h>
 #define MAX_LENGTH (10)
 
 /**
@@ -91,5 +83,24 @@ void set_all(char * ptr, char value, unsigned int size);
  * @return void.
  */
 void clear_all(char * ptr, unsigned int size);
+
+
+/********************************************************************
+ Here is the stuff added by ATurvey for Course1 final assessment
+    (Sorry, comments not Doxygen compliant)
+********************************************************************/
+uint8_t *my_memmove(uint8_t *src, uint8_t *dst, size_t length);
+
+uint8_t *my_memcopy(uint8_t *src, uint8_t *dst, size_t length);
+
+uint8_t *my_memset(uint8_t *src, size_t length, uint8_t value);
+
+uint8_t *my_memzero(uint8_t *src, size_t length);
+
+uint8_t *my_reverse(uint8_t *src, size_t length);
+
+int32_t *reserve_words(size_t length);
+
+void free_words(int32_t *src); 
 
 #endif /* __MEMORY_H__ */
