@@ -54,8 +54,7 @@ CFLAGS = -Wall               \
          -v
 
 # Linker file and flags
-LDFLAGS = -Wl
-  #,-Map=$(TARGET).map 
+LDFLAGS = -Wl,-Map=$(TARGET).map 
 
 # Flags for size tool
 ifeq ($(OS), Darwin)

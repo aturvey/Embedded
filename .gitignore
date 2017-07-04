@@ -58,3 +58,4 @@ dkms.conf
 
 # Vim swap files
 *.swp
+*.swo
